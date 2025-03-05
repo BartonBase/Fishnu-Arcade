@@ -13,11 +13,6 @@ Play the games now at: [https://yourusername.github.io/BBGames](https://youruser
 2. Click "Play Now" on any game card to start playing.
 3. Use arrow keys and spacebar (for Broth Invaders) to control the game.
 
-## Adding New Games
-- Create a new game page in the `games/` folder (e.g., `new-game.html` and `new-game.js`).
-- Add a card to `index.html` with the game’s title, description, and link.
-- Upload to this repository.
-
 ## Setup
 This site is hosted on GitHub Pages:
 - Repository: `https://github.com/yourusername/BBGames`
@@ -25,6 +20,5 @@ This site is hosted on GitHub Pages:
 
 ## Credits
 - Built by Barton Base
-- Game assets sourced from [list sources if applicable, e.g., "Postimg.cc for images"].
 
 Enjoy the games!
