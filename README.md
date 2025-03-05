@@ -24,7 +24,7 @@ This site is hosted on GitHub Pages:
 - Source: `main` branch, root directory (`/`)
 
 ## Credits
-- Built by [Your Name]
+- Built by Barton Base
 - Game assets sourced from [list sources if applicable, e.g., "Postimg.cc for images"].
 
 Enjoy the games!
