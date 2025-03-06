@@ -25,7 +25,7 @@ const STATES = {
 };
 let gameState = STATES.MENU;
 
-// Load images (external URLs for testing)
+// Load images
 const heroImage = new Image(); heroImage.src = 'https://i.postimg.cc/1zs46h1m/Untitled-4.png';
 const bulletImage = new Image(); bulletImage.src = 'https://i.postimg.cc/3N7LQxsM/Untitled.png';
 const invaderImageRow1 = new Image(); invaderImageRow1.src = 'https://i.postimg.cc/Y0GSktY3/Untitled-3.png';
@@ -40,7 +40,7 @@ const powerUpImage = new Image(); powerUpImage.src = 'https://i.postimg.cc/9F4X2
 const newSpaceshipImage = new Image(); newSpaceshipImage.src = 'https://i.postimg.cc/rpphwDx6/Untitled-15.png';
 const level2BossImage = new Image(); level2BossImage.src = 'https://i.postimg.cc/MGKWZm9W/Untitled-17.png';
 
-// Load audio (external URLs for testing)
+// Load audio
 const shootSound = new Audio('https://www.myinstants.com/media/sounds/shoot.wav');
 const level1Music = new Audio('https://drive.google.com/uc?export=download&id=1qSksvQfxhaQ4hBAZHyWO4bX64qGpnPZM');
 const level2Music = new Audio('https://drive.google.com/uc?export=download&id=1y7cXpVS1ffXGGS6FdwalBccO8SpvaOxA');
@@ -91,13 +91,13 @@ function createNebulae() {
 }
 createStars();
 
-// Player (scaled for 800x600 canvas)
+// Player
 const player = {
-    x: canvas.width / 2 - 20, // Center, adjusted for 40px width
-    y: canvas.height - 57, // Bottom, adjusted for 27px height + 7px padding
+    x: canvas.width / 2,
+    y: canvas.height - 50 - 7,
     width: 40,
     height: 27,
-    speed: 3.5, // Revert to original speed
+    speed: 3.5,
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
@@ -116,11 +116,11 @@ const player = {
     currentPowerUp: null
 };
 
-// Player Bullets (with pooling, scaled for speed)
+// Player Bullets (with pooling)
 const bullets = Array(BULLET_POOL_SIZE).fill().map(() => ({
     x: 0, y: 0, width: BULLET_WIDTH, height: BULLET_HEIGHT, active: false, dx: 0, pierced: false
 }));
-const bulletSpeed = 7; // Increased from 3.9 to match 800x600 for normal speed
+const bulletSpeed = 3.9;
 function spawnBullet(x, y, dx = 0) {
     const bullet = bullets.find(b => !b.active);
     if (bullet) {
@@ -133,99 +133,99 @@ function spawnBullet(x, y, dx = 0) {
     }
 }
 
-// Invaders (scaled for speed)
+// Invaders
 const invaders = [];
 const invaderRows = 5;
 const invaderCols = 10;
 const invaderWidth = 40;
 const invaderHeight = 15;
-const initialInvaderSpeed = 0.5; // Increased from 0.5 to match 800x600 for normal speed
+const initialInvaderSpeed = 0.5;
 let invaderSpeed = initialInvaderSpeed;
 let invaderDirection = 1;
 let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL;
 
-// Stealth Invaders (Level 2, scaled for speed)
+// Stealth Invaders (Level 2)
 const stealthInvaders = [];
 const stealthWidth = 30;
 const stealthHeight = 20;
-const stealthSpeed = 0.5; // Increased from 0.8 to match 800x600 for normal speed
+const stealthSpeed = 0.8;
 
-// Sniper Enemy (scaled for speed)
+// Sniper Enemy
 const snipers = [];
 const sniperWidth = 80;
 const sniperHeight = 80;
-const sniperBaseSpeed = 0.5; // Increased from 0.7 to match 800x600 for normal speed
+const sniperBaseSpeed = 0.7;
 const sniperShootInterval = 360;
 const sniperHealth = 4;
 let snipersSpawnedThisWave = 0;
 
-// Tank Enemy (scaled for speed)
+// Tank Enemy
 const tanks = [];
 const tankWidth = 60;
 const tankHeight = 40;
-const tankBaseSpeed = 0.5; // Increased from 0.1 to match 800x600 for normal speed
+const tankBaseSpeed = 0.1;
 const tankHealth = 3;
 const tankShootInterval = 180;
 let tankSpawnedThisWave = false;
 
-// Black Hole Guardian (scaled for speed)
+// Black Hole Guardian
 const guardians = [];
 const guardianWidth = 50;
 const guardianHeight = 50;
-const guardianSpeed = 0.2; // Increased from 0.2 to match 800x600 for normal speed
+const guardianSpeed = 0.2;
 const guardianHealth = 5;
 const guardianShootInterval = 120;
 
-// Boss (Spaceship in Wave 3 Level 1 and Level 3 even waves, scaled for speed)
+// Boss (Spaceship in Wave 3 Level 1 and Level 3 even waves)
 let spaceship = null;
 const spaceshipWidth = 80;
 const spaceshipHeight = 48;
 const spaceshipBossHeight = 154;
-const spaceshipBaseSpeed = 0.96; // Increased from 0.96 to match 800x600 for normal speed
+const spaceshipBaseSpeed = 0.96;
 const spaceshipBossHealth = 40;
 let spaceshipSpawnedThisWave = false;
 let bossSpawnCounter = 0;
 
-// Twin Bosses (Level 2 Wave 3 and Level 3 even waves, scaled for speed)
+// Twin Bosses (Level 2 Wave 3 and Level 3 even waves)
 let twinBosses = [];
 
-// Invader Bullets (scaled for speed)
+// Invader Bullets
 const invaderBullets = [];
-const invaderBulletSpeed = 0.5; // Increased from 0.5 to match 800x600 for normal speed
+const invaderBulletSpeed = 0.5;
 const invaderBulletWidth = 5;
 const invaderBulletHeight = 15;
-const sniperBulletSpeed = 1; // Increased from 1.0 to match 800x600 for normal speed
+const sniperBulletSpeed = 1.0;
 const tankBulletWidth = 10;
-const tankBulletSpeed = 0.25; // Increased from 0.25 to match 800x600 for normal speed
+const tankBulletSpeed = 0.25;
 const bossLaserWidth = 8;
 const bossLaserHeight = 30;
-const bossLaserSpeed = 2.0; // Increased from 2.0 to match 800x600 for normal speed
+const bossLaserSpeed = 2.0;
 const guardianBulletWidth = 15;
 const guardianBulletHeight = 20;
-const guardianBulletSpeed = 0.5; // Increased from 0.5 to match 800x600 for normal speed
+const guardianBulletSpeed = 0.5;
 let shootTimer = 0;
 let enemySpawnTimer = 0;
 
-// Shields (positioned for 800x600)
+// Shields
 const shields = [];
 let shieldWidth = 90;
 const shieldHeight = 20;
 const shieldY = canvas.height - 142;
 
-// Power-Up (positioned for 800x600)
+// Power-Up
 let powerUp = null;
 const powerUpWidth = 20;
 const powerUpHeight = 20;
-const powerUpY = canvas.height - 57; // Adjusted for player position
+const powerUpY = canvas.height - 50 - 7;
 
-// Environmental Hazards (Level 2 and 3, scaled for speed)
+// Environmental Hazards (Level 2 and 3)
 const meteors = [];
 const shieldMeteors = [];
 const blackHoles = [];
 const meteorWidth = 20;
 const meteorHeight = 20;
-const meteorSpeed = 1.2; // Increased from 1.2 to match 800x600 for normal speed
-const shieldMeteorSpeed = 2.0; // Increased from 2.0 to match 800x600 for normal speed
+const meteorSpeed = 1.2;
+const shieldMeteorSpeed = 2.0;
 const blackHoleRadius = 40;
 
 // Explosion Particles
@@ -245,7 +245,7 @@ function spawnExplosion(x, y) {
     }
 }
 
-// Game variables (scaled for performance)
+// Game variables
 let score = 0;
 let wave = 1;
 let level = 1;
@@ -266,7 +266,7 @@ const waveModifiers = [
     { name: "Rapid Fire", effect: () => invaderShootInterval /= 2 }
 ];
 
-// Initialize invaders (scaled for 800x600)
+// Initialize invaders
 function createInvaders() {
     invaders.length = 0;
     snipers.length = 0;
@@ -492,7 +492,7 @@ function createInvaders() {
     if (level === 3) invaderSpeed *= 1.05;
 }
 
-// Initialize shields (positioned for 800x600)
+// Initialize shields
 function createShields() {
     shields.length = 0;
     const adjustedShieldWidth = level === 2 ? shieldWidth * 0.8 : shieldWidth;
@@ -508,7 +508,7 @@ function createShields() {
     }
 }
 
-// Reset game (scaled for 800x600)
+// Reset game
 function resetGame() {
     player.x = canvas.width / 2;
     player.dx = 0;
@@ -550,7 +550,7 @@ function resetGame() {
     createShields();
 }
 
-// Reset game state for new level (scaled for 800x600)
+// Reset game state for new level
 function resetGameStateForNewLevel() {
     player.x = canvas.width / 2;
     player.dx = 0;
@@ -605,7 +605,7 @@ function findNearestShield(tankX) {
     return nearestShield ? nearestShield.x + shieldWidth / 2 : tankX;
 }
 
-// Power-up spawning (positioned for 800x600)
+// Power-up spawning
 function spawnWavePowerUp() {
     if (level === 1) {
         if (wave === 1) {
@@ -757,7 +757,7 @@ function getBottomInvaders() {
     return bottomInvaders;
 }
 
-// Update game objects (optimized for performance)
+// Update game objects
 function update() {
     if (gameState === STATES.LEVEL_COMPLETE) {
         levelCompleteTimer++;
@@ -770,12 +770,10 @@ function update() {
 
     if (gameState !== STATES.PLAYING) return;
 
-    // Player movement (optimized)
-    player.x += player.dx * player.speed;
+    player.x += player.dx;
     if (player.x < 0) player.x = 0;
     if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
 
-    // Power-up timer
     if (player.powerUpTimer > 0) {
         player.powerUpTimer--;
         if (player.powerUpTimer <= 0 && level !== 3) {
@@ -788,13 +786,10 @@ function update() {
         }
     }
 
-    // Player shooting cooldown
     if (player.shootCooldown > 0) player.shootCooldown--;
 
-    // Laser pulse for visual effect
     if (player.laserActive) player.laserPulse += 0.1;
 
-    // Update bullets (optimized loop)
     for (let i = bullets.length - 1; i >= 0; i--) {
         let b = bullets[i];
         if (b.active) {
@@ -811,15 +806,12 @@ function update() {
                     b.y < shield.y + shield.height &&
                     b.y + b.height > shield.y) {
                     b.active = false;
-                    shield.health -= 10;
-                    if (shield.health <= 0) shields.splice(j, 1);
                     break;
                 }
             }
         }
     }
 
-    // Laser attack (optimized for performance)
     if (player.laserActive) {
         if (player.laserKills >= 15) {
             player.laserActive = false;
@@ -831,7 +823,9 @@ function update() {
         let allEnemies = [
             ...invaders.filter(inv => inv.active),
             ...stealthInvaders.filter(stealth => stealth.active)
-        ].sort((a, b) => a.y - b.y);
+        ];
+
+        allEnemies.sort((a, b) => a.y - b.y);
 
         let hitThisFrame = false;
         for (let enemy of allEnemies) {
@@ -868,9 +862,8 @@ function update() {
         }
     }
 
-    // Invader movement (optimized)
-    let reachedEdge = false;
     if (!(wave === 3 && level === 1)) {
+        let reachedEdge = false;
         for (let invader of invaders) {
             if (!invader.active) continue;
             invader.x += invaderSpeed * invaderDirection;
@@ -960,7 +953,6 @@ function update() {
         }
     }
 
-    // Stealth Invader movement (optimized)
     for (let stealth of stealthInvaders) {
         if (!stealth.active) continue;
         stealth.x += stealthSpeed * invaderDirection;
@@ -976,7 +968,6 @@ function update() {
         }
     }
 
-    // Sniper movement and shooting (optimized)
     for (let sniper of snipers) {
         if (wave !== 3 || level !== 1) {
             sniper.x += sniper.speed * sniper.direction;
@@ -1008,7 +999,6 @@ function update() {
         }
     }
 
-    // Tank movement and shooting (optimized)
     for (let tank of tanks) {
         if (wave !== 3 || level !== 1) {
             if (tank.y < shieldY - tankHeight) {
@@ -1048,7 +1038,6 @@ function update() {
         }
     }
 
-    // Guardian movement and shooting (optimized)
     for (let guardian of guardians) {
         guardian.x += guardian.speed * invaderDirection;
         if (guardian.x <= 0 || guardian.x + guardianWidth >= canvas.width) {
@@ -1070,7 +1059,6 @@ function update() {
         }
     }
 
-    // Spaceship movement (optimized)
     if (spaceship) {
         if (wave === 3 && level === 1) {
             spaceship.x += spaceship.speedX;
@@ -1093,7 +1081,6 @@ function update() {
         }
     }
 
-    // Twin Bosses movement (optimized)
     for (let boss of twinBosses) {
         boss.x += boss.speedX;
         boss.y += boss.speedY;
@@ -1105,7 +1092,6 @@ function update() {
         }
     }
 
-    // Meteors and shield meteors (optimized)
     for (let i = meteors.length - 1; i >= 0; i--) {
         let meteor = meteors[i];
         meteor.y += meteor.speed;
@@ -1125,7 +1111,7 @@ function update() {
                 break;
             }
         }
-        if (meteor.x < player.x + player.width &&
+        if (i >= 0 && meteor.x < player.x + player.width &&
             meteor.x + meteor.width > player.x &&
             meteor.y < player.y + player.height &&
             meteor.y + meteor.height > player.y) {
@@ -1155,7 +1141,6 @@ function update() {
         }
     }
 
-    // Black holes (optimized)
     for (let i = blackHoles.length - 1; i >= 0; i--) {
         let bh = blackHoles[i];
         if (!bh.spawned) {
@@ -1173,7 +1158,6 @@ function update() {
         }
     }
 
-    // Shields and collisions (optimized)
     for (let i = shields.length - 1; i >= 0; i--) {
         let shield = shields[i];
         for (let invader of invaders) {
@@ -1236,7 +1220,6 @@ function update() {
         }
     }
 
-    // Game over condition (optimized)
     if (!(wave === 3 && (level === 1 || level === 2))) {
         for (let invader of invaders) {
             if (invader.active && invader.y + invaderHeight >= canvas.height) {
@@ -1261,7 +1244,6 @@ function update() {
         }
     }
 
-    // Invader shooting (optimized)
     shootTimer++;
     if (shootTimer >= invaderShootInterval) {
         if (wave !== 3 || level !== 1) {
@@ -1359,7 +1341,6 @@ function update() {
         shootTimer = 0;
     }
 
-    // Update invader bullets (optimized)
     for (let i = invaderBullets.length - 1; i >= 0; i--) {
         let ib = invaderBullets[i];
         if (ib.tracks) {
@@ -1400,7 +1381,6 @@ function update() {
         }
     }
 
-    // Power-up collision (optimized)
     if (powerUp && 
         player.x < powerUp.x + powerUpWidth &&
         player.x + player.width > powerUp.x &&
@@ -1410,7 +1390,6 @@ function update() {
         powerUp = null;
     }
 
-    // Collision with bullets (optimized)
     for (let i = bullets.length - 1; i >= 0; i--) {
         let b = bullets[i];
         if (!b.active) continue;
@@ -1627,7 +1606,6 @@ function update() {
         }
     }
 
-    // Update particles (optimized)
     for (let i = particles.length - 1; i >= 0; i--) {
         let p = particles[i];
         p.x += p.dx;
@@ -1640,7 +1618,7 @@ function update() {
         }
     }
 
-    // Wave progression (optimized)
+    // Wave progression
     const activeInvaders = invaders.filter(inv => inv.active).length + stealthInvaders.filter(s => s.active).length;
     const isBossWave = (wave === 3 && (level === 1 || level === 2));
     if (!isBossWave) {
@@ -1669,7 +1647,7 @@ function update() {
     }
 }
 
-// Damage player function (unchanged)
+// Damage player function
 function damagePlayer(amount) {
     if (player.shield > 0) {
         player.shield -= amount;
@@ -1686,12 +1664,12 @@ function damagePlayer(amount) {
     }
 }
 
-// Update score multiplier (unchanged)
+// Update score multiplier
 function updateScoreMultiplier() {
     scoreMultiplier = 1 + Math.floor(player.killsWithoutHit / 10);
 }
 
-// Update invader attributes (optimized)
+// Update invader attributes
 function updateInvaderAttributes() {
     const activeInvaders = invaders.filter(inv => inv.active).length + stealthInvaders.filter(s => s.active).length;
     let waveSpeedIncrease = Math.pow(1.15, wave - 1);
@@ -1790,7 +1768,7 @@ function updateInvaderAttributes() {
     }
 }
 
-// Draw menu with cheat code button (unchanged, optimized for performance)
+// Draw menu with cheat code button
 function drawMenu() {
     ctx.fillStyle = 'white';
     ctx.font = '60px Arial';
@@ -1817,7 +1795,7 @@ function drawMenu() {
     }
 }
 
-// Draw game over (unchanged, optimized for performance)
+// Draw game over
 function drawGameOver() {
     ctx.font = 'bold 60px "Press Start 2P"';
     ctx.fillStyle = 'white';
@@ -1829,7 +1807,7 @@ function drawGameOver() {
     ctx.fillText(`Kills: ${totalKills}`, canvas.width / 4, 300);
     ctx.fillText(`Wave: ${wave}`, 3 * canvas.width / 4, 250);
 
-        ctx.fillStyle = 'gray';
+    ctx.fillStyle = 'gray';
     ctx.fillRect(300, 440, 200, 50);
     ctx.fillStyle = 'white';
     ctx.font = '20px "Press Start 2P"';
@@ -1837,7 +1815,7 @@ function drawGameOver() {
     ctx.fillText('Main Menu', 330, 475);
 }
 
-// Draw level complete (unchanged, optimized for performance)
+// Draw level complete
 function drawLevelComplete() {
     ctx.font = 'bold 60px "Press Start 2P"';
     ctx.fillStyle = 'white';
@@ -1850,7 +1828,7 @@ function drawLevelComplete() {
     ctx.fillText(`Start Level ${level + 1}`, 330, canvas.height / 2 + 85);
 }
 
-// Draw game objects (optimized for performance)
+// Draw game objects
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -1884,7 +1862,6 @@ function draw() {
         return;
     }
 
-    // Draw player (optimized)
     if (heroImage.complete) {
         ctx.drawImage(heroImage, player.x, player.y, player.width, player.height);
     } else {
@@ -1892,7 +1869,6 @@ function draw() {
         ctx.fillRect(player.x, player.y, player.width, player.height);
     }
 
-    // Draw shield (optimized)
     if (player.shield > 0) {
         ctx.strokeStyle = 'cyan';
         ctx.lineWidth = 2;
@@ -1901,7 +1877,6 @@ function draw() {
         ctx.stroke();
     }
 
-    // Draw laser (optimized)
     if (player.laserActive) {
         ctx.strokeStyle = 'red';
         ctx.lineWidth = 5 + Math.sin(player.laserPulse) * 2;
@@ -1911,7 +1886,6 @@ function draw() {
         ctx.stroke();
     }
 
-    // Draw bullets (optimized)
     for (let b of bullets) {
         if (b.active) {
             if (bulletImage.complete) {
@@ -1923,7 +1897,6 @@ function draw() {
         }
     }
 
-    // Draw invaders (optimized)
     for (let invader of invaders) {
         if (invader.active) {
             const imageIndex = invader.row % 4;
@@ -1942,7 +1915,6 @@ function draw() {
         }
     }
 
-    // Draw stealth invaders (optimized)
     for (let stealth of stealthInvaders) {
         if (stealth.active) {
             ctx.fillStyle = stealth.visible ? '#00ffff' : 'rgba(128, 128, 128, 0.3)';
@@ -1950,8 +1922,7 @@ function draw() {
         }
     }
 
-    // Draw snipers (optimized)
-    for (let sniper of snipers) {
+        for (let sniper of snipers) {
         if (sniperImage.complete) {
             ctx.drawImage(sniperImage, sniper.x, sniper.y, sniperWidth, sniperHeight);
         } else {
@@ -1960,7 +1931,6 @@ function draw() {
         }
     }
 
-    // Draw tanks (optimized)
     for (let tank of tanks) {
         if (tankImage.complete) {
             ctx.drawImage(tankImage, tank.x, tank.y, tankWidth, tankHeight);
@@ -1970,7 +1940,6 @@ function draw() {
         }
     }
 
-    // Draw guardians (optimized)
     for (let guardian of guardians) {
         ctx.fillStyle = 'rgba(50, 0, 50, 0.9)';
         ctx.beginPath();
@@ -1978,7 +1947,6 @@ function draw() {
         ctx.fill();
     }
 
-    // Draw spaceship (optimized)
     if (spaceship) {
         if (wave === 3 && level === 1) {
             if (bossImage.complete) {
@@ -1998,7 +1966,6 @@ function draw() {
         }
     }
 
-    // Draw twin bosses (optimized)
     for (let boss of twinBosses) {
         if (level2BossImage.complete) {
             ctx.drawImage(level2BossImage, boss.x, boss.y, spaceshipWidth, spaceshipBossHeight);
@@ -2018,7 +1985,6 @@ function draw() {
         ctx.fillText(`Boss Health: ${totalBossHealth}`, canvas.width / 2, 30);
     }
 
-    // Draw power-up (optimized)
     if (powerUp) {
         if (powerUpImage.complete) {
             ctx.drawImage(powerUpImage, powerUp.x, powerUp.y, powerUp.width, powerUp.height);
@@ -2034,7 +2000,6 @@ function draw() {
         }
     }
 
-    // Draw shields (optimized)
     for (let shield of shields) {
         ctx.fillStyle = 'gray';
         ctx.fillRect(shield.x, shield.y, shield.width, shield.height);
@@ -2049,7 +2014,6 @@ function draw() {
         ctx.fillRect(healthBarX, healthBarY, healthBarWidth * healthPercentage, healthBarHeight);
     }
 
-    // Draw meteors (optimized)
     for (let meteor of meteors) {
         ctx.fillStyle = '#8b4513';
         ctx.beginPath();
@@ -2057,7 +2021,6 @@ function draw() {
         ctx.fill();
     }
 
-    // Draw shield meteors (optimized)
     for (let meteor of shieldMeteors) {
         ctx.fillStyle = '#a0522d';
         ctx.beginPath();
@@ -2065,7 +2028,6 @@ function draw() {
         ctx.fill();
     }
 
-    // Draw black holes (optimized)
     for (let bh of blackHoles) {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.8)';
         ctx.beginPath();
@@ -2073,7 +2035,6 @@ function draw() {
         ctx.fill();
     }
 
-    // Draw invader bullets (optimized)
     for (let ib of invaderBullets) {
         if (ib.isLaser) {
             ctx.fillStyle = 'white';
@@ -2098,7 +2059,6 @@ function draw() {
         }
     }
 
-    // Draw UI (optimized)
     ctx.fillStyle = 'white';
     ctx.font = '20px Arial';
     ctx.fillText(`Multiplier: x${scoreMultiplier}`, 10, 30);
@@ -2127,7 +2087,6 @@ function draw() {
     ctx.fillText(`Wave: ${wave}`, canvas.width - 10, 70);
     ctx.textAlign = 'left';
 
-    // Draw particles (optimized)
     for (let p of particles) {
         if (p.life > 0) {
             ctx.fillStyle = p.color;
@@ -2140,7 +2099,7 @@ function draw() {
     }
 }
 
-// Controls (unchanged, optimized for performance)
+// Controls
 document.addEventListener('keydown', (e) => {
     if (gameState === STATES.PLAYING) {
         if (e.key === 'ArrowLeft') player.dx = -player.speed;
@@ -2229,14 +2188,15 @@ canvas.addEventListener('click', (e) => {
     }
 });
 
-// Game loop (optimized for performance)
+// Game loop
 function gameLoop() {
     update();
     draw();
     requestAnimationFrame(gameLoop);
 }
 
-// Initialize and start (optimized)
+// Initialize and start
+canvas.width = 800;
+canvas.height = 600;
 resetGame();
 gameLoop();
-createStars();
