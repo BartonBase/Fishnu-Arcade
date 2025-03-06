@@ -41,7 +41,7 @@ const newSpaceshipImage = new Image(); newSpaceshipImage.src = 'https://i.postim
 const level2BossImage = new Image(); level2BossImage.src = 'https://i.postimg.cc/MGKWZm9W/Untitled-17.png';
 
 // Load audio (internal assets in assets/music/)
-const shootSound = new Audio('https://www.myinstants.com/media/sounds/shoot.wav'); // Keep external for simplicity, replace if needed
+const shootSound = new Audio('https://www.myinstants.com/media/sounds/shoot.wav'); // Keep external for now
 const level1Music = new Audio('../assets/music/level1.wav');
 const level2Music = new Audio('../assets/music/level2.wav');
 const level3Music = new Audio('../assets/music/level3.mp3');
@@ -49,6 +49,14 @@ const musics = [level1Music, level2Music, level3Music];
 musics.forEach(m => {
     m.loop = true;
     m.volume = 0.5;
+});
+
+// Add start button listener
+document.getElementById('startButton').addEventListener('click', () => {
+    document.getElementById('startButton').style.display = 'none'; // Hide button
+    gameState = STATES.PLAYING; // Start the game
+    playLevelMusic(); // Initiate audio with user interaction
+    // Add any other initialization code here (e.g., game loop start)
 });
 
 function playLevelMusic() {
@@ -95,14 +103,14 @@ function createNebulae() {
     }
 }
 createStars();
+
 // Player (scaled for 800x600 canvas, reverted to 9.6 from 19.16)
-// ... (rest of the code remains unchanged)
 const player = {
-    x: canvas.width / 2 - 20, // Center, adjusted for 40px width
-    y: canvas.height - 57, // Bottom, adjusted for 27px height + 7px padding
+    x: canvas.width / 2 - 20,
+    y: canvas.height - 57,
     width: 40,
     height: 27,
-    speed: 5.5, // Reverted to 9.6 (from 50% increase on 6.4, no further increases)
+    speed: 5.0,
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
@@ -120,7 +128,7 @@ const player = {
     laserDamageInterval: 5,
     currentPowerUp: null
 };
-
+// ... (rest of the code remains unchanged)
 // Player Bullets (with pooling, reverted to 8.8 from 14.1)
 const bullets = Array(BULLET_POOL_SIZE).fill().map(() => ({
     x: 0, y: 0, width: BULLET_WIDTH, height: BULLET_HEIGHT, active: false, dx: 0, pierced: false
@@ -144,7 +152,7 @@ const invaderRows = 5;
 const invaderCols = 10;
 const invaderWidth = 40;
 const invaderHeight = 15;
-const initialInvaderSpeed = 0.75; // Reverted to 1.2 (from 60% increase on 0.75, no further increases)
+const initialInvaderSpeed = 0.65; // Reverted to 1.2 (from 60% increase on 0.75, no further increases)
 let invaderSpeed = initialInvaderSpeed;
 let invaderDirection = 1;
 let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL; // Already adjusted to 176 for 50% faster fire rate
