@@ -15,6 +15,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow: hidden; /* Prevent scrollbars from affecting layout */
         }
         canvas {
             border: 1px solid #00ff00; /* Green border for retro style */
@@ -23,6 +24,7 @@
             max-width: 100%;
             max-height: 100vh; /* Ensures it fits within viewport height */
             object-fit: contain; /* Prevents distortion while maintaining aspect ratio */
+            display: block; /* Ensures no extra margins or padding */
         }
     </style>
 </head>
