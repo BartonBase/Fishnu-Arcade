@@ -97,7 +97,7 @@ const player = {
     y: canvas.height - 50 - 7,
     width: 40,
     height: 27,
-    speed: 3.5,
+    speed: 4.5,
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
@@ -139,7 +139,7 @@ const invaderRows = 5;
 const invaderCols = 10;
 const invaderWidth = 40;
 const invaderHeight = 15;
-const initialInvaderSpeed = 0.5;
+const initialInvaderSpeed = 1;
 let invaderSpeed = initialInvaderSpeed;
 let invaderDirection = 1;
 let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL;
@@ -154,7 +154,7 @@ const stealthSpeed = 0.8;
 const snipers = [];
 const sniperWidth = 80;
 const sniperHeight = 80;
-const sniperBaseSpeed = 0.7;
+const sniperBaseSpeed = 1.3;
 const sniperShootInterval = 360;
 const sniperHealth = 4;
 let snipersSpawnedThisWave = 0;
@@ -163,7 +163,7 @@ let snipersSpawnedThisWave = 0;
 const tanks = [];
 const tankWidth = 60;
 const tankHeight = 40;
-const tankBaseSpeed = 0.1;
+const tankBaseSpeed = 0.25;
 const tankHealth = 3;
 const tankShootInterval = 180;
 let tankSpawnedThisWave = false;
@@ -172,7 +172,7 @@ let tankSpawnedThisWave = false;
 const guardians = [];
 const guardianWidth = 50;
 const guardianHeight = 50;
-const guardianSpeed = 0.2;
+const guardianSpeed = 0.5;
 const guardianHealth = 5;
 const guardianShootInterval = 120;
 
@@ -191,18 +191,18 @@ let twinBosses = [];
 
 // Invader Bullets
 const invaderBullets = [];
-const invaderBulletSpeed = 0.5;
+const invaderBulletSpeed = 1.25;
 const invaderBulletWidth = 5;
 const invaderBulletHeight = 15;
-const sniperBulletSpeed = 1.0;
+const sniperBulletSpeed = 1.75;
 const tankBulletWidth = 10;
-const tankBulletSpeed = 0.25;
+const tankBulletSpeed = 1;
 const bossLaserWidth = 8;
 const bossLaserHeight = 30;
 const bossLaserSpeed = 2.0;
 const guardianBulletWidth = 15;
 const guardianBulletHeight = 20;
-const guardianBulletSpeed = 0.5;
+const guardianBulletSpeed = .75;
 let shootTimer = 0;
 let enemySpawnTimer = 0;
 
