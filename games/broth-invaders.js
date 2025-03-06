@@ -24,6 +24,8 @@ const STATES = {
     LEVEL_COMPLETE: 'level_complete'
 };
 let gameState = STATES.MENU;
+let level = 1; // Default level for testing audio
+let wave = 1; // Default wave for testing audio
 
 // Load images (external URLs for testing)
 const heroImage = new Image(); heroImage.src = 'https://i.postimg.cc/1zs46h1m/Untitled-4.png';
@@ -51,13 +53,24 @@ musics.forEach(m => {
     m.volume = 0.5;
 });
 
-// Add start button listener
-document.getElementById('startButton').addEventListener('click', () => {
-    document.getElementById('startButton').style.display = 'none'; // Hide button
-    gameState = STATES.PLAYING; // Start the game
-    playLevelMusic(); // Initiate audio with user interaction
-    // Add any other initialization code here (e.g., game loop start)
-});
+// Ensure audio plays with existing start mechanism
+let audioInitialized = false;
+function initializeAudio() {
+    if (!audioInitialized && gameState === STATES.PLAYING) {
+        playLevelMusic();
+        audioInitialized = true;
+        console.log('Audio initialized with game start');
+    }
+}
+
+// Call initializeAudio() where your start button or action is triggered
+// Example: If you have a startGame() function, add initializeAudio() inside it:
+// function startGame() {
+//     gameState = STATES.PLAYING;
+//     initializeAudio();
+//     // ... rest of start logic
+// }
+// Or if triggered by a key press or click, add it there
 
 function playLevelMusic() {
     // Pause all tracks and reset their time
@@ -110,7 +123,7 @@ const player = {
     y: canvas.height - 57,
     width: 40,
     height: 27,
-    speed: 5.0,
+    speed: 5,
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
@@ -129,7 +142,6 @@ const player = {
     currentPowerUp: null
 };
 // ... (rest of the code remains unchanged)
-// Player Bullets (with pooling, reverted to 8.8 from 14.1)
 const bullets = Array(BULLET_POOL_SIZE).fill().map(() => ({
     x: 0, y: 0, width: BULLET_WIDTH, height: BULLET_HEIGHT, active: false, dx: 0, pierced: false
 }));
