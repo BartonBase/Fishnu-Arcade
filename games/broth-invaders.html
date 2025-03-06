@@ -3,38 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Broth Invaders - Barton Base Games</title>
-   <style>
-    body {
-        background-color: #121212;
-        margin: 0;
-        padding: 0; /* Remove padding to fill screen */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100vh; /* Full viewport height */
-    }
-    canvas {
-        border: 1px solid #00ff00;
-        width: 100%;
-        max-width: 800px; /* Match your game’s default width */
-        height: auto; /* Scale height proportionally */
-        max-height: 600px; /* Prevent overflow */
-    }
-    .back-link {
-        color: #00ff00;
-        text-decoration: none;
-        margin-top: 20px;
-        font-family: 'Arial', sans-serif;
-    }
-    .back-link:hover {
-        text-decoration: underline;
-    }
-</style>
+    <title>Broth Invaders</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            font-family: 'Press Start 2P', cursive; /* Retro arcade font */
+            color: #0f0; /* Green text for consistency */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        canvas {
+            border: 1px solid #00ff00; /* Green border for retro style */
+            width: 800px;
+            height: 600px;
+            max-width: 100%;
+            max-height: 100vh; /* Ensures it fits within viewport height */
+            object-fit: contain; /* Prevents distortion while maintaining aspect ratio */
+        }
+    </style>
 </head>
 <body>
-    <canvas id="gameCanvas"></canvas>
-    <a href="../index.html" class="back-link">Back to BBGames</a>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
     <script src="broth-invaders.js"></script>
 </body>
 </html>
