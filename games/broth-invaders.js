@@ -1,6 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-
+canvas.width = 800; // Fixed width for consistent logic
+canvas.height = 600; // Fixed height for consistent logic
 // Constants for readability
 const BASE_INVADER_SHOOT_INTERVAL = 264;
 const ENEMY_SPAWN_DELAY = 240;
