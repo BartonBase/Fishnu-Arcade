@@ -1,6 +1,6 @@
-# Barton Base Games (BBGames)
+# Fishnu's Arcade
 
-Welcome to **Barton Base Games** - a collection of fun, browser-based games created by [Your Name]! This site is hosted on GitHub Pages and will grow with more games over time.
+Welcome to **Fishnu's Arcade** - a collection of fun, browser-based games created by Barton Baste! This site is hosted on GitHub Pages and will grow with more games over time.
 
 ## Live Site
 Play the games now at: [https://yourusername.github.io/BBGames](https://yourusername.github.io/BBGames)
@@ -19,6 +19,6 @@ This site is hosted on GitHub Pages:
 - Source: `main` branch, root directory (`/`)
 
 ## Credits
-- Built by Barton Base
+- Built by Barton Baste
 
 Enjoy the games!
