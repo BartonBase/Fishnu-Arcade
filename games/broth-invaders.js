@@ -97,7 +97,7 @@ const player = {
     y: canvas.height - 50 - 7,
     width: 40,
     height: 27,
-    speed: 4.5,
+    speed: 6,
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
@@ -120,7 +120,7 @@ const player = {
 const bullets = Array(BULLET_POOL_SIZE).fill().map(() => ({
     x: 0, y: 0, width: BULLET_WIDTH, height: BULLET_HEIGHT, active: false, dx: 0, pierced: false
 }));
-const bulletSpeed = 3.9;
+const bulletSpeed = 7.5;
 function spawnBullet(x, y, dx = 0) {
     const bullet = bullets.find(b => !b.active);
     if (bullet) {
@@ -139,7 +139,7 @@ const invaderRows = 5;
 const invaderCols = 10;
 const invaderWidth = 40;
 const invaderHeight = 15;
-const initialInvaderSpeed = 1;
+const initialInvaderSpeed = 1.5;
 let invaderSpeed = initialInvaderSpeed;
 let invaderDirection = 1;
 let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL;
@@ -148,13 +148,13 @@ let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL;
 const stealthInvaders = [];
 const stealthWidth = 30;
 const stealthHeight = 20;
-const stealthSpeed = 0.8;
+const stealthSpeed = 1.5;
 
 // Sniper Enemy
 const snipers = [];
 const sniperWidth = 80;
 const sniperHeight = 80;
-const sniperBaseSpeed = 1.3;
+const sniperBaseSpeed = 1.9;
 const sniperShootInterval = 360;
 const sniperHealth = 4;
 let snipersSpawnedThisWave = 0;
@@ -163,7 +163,7 @@ let snipersSpawnedThisWave = 0;
 const tanks = [];
 const tankWidth = 60;
 const tankHeight = 40;
-const tankBaseSpeed = 0.25;
+const tankBaseSpeed = 1;
 const tankHealth = 3;
 const tankShootInterval = 180;
 let tankSpawnedThisWave = false;
@@ -172,7 +172,7 @@ let tankSpawnedThisWave = false;
 const guardians = [];
 const guardianWidth = 50;
 const guardianHeight = 50;
-const guardianSpeed = 0.5;
+const guardianSpeed = 1;
 const guardianHealth = 5;
 const guardianShootInterval = 120;
 
@@ -181,7 +181,7 @@ let spaceship = null;
 const spaceshipWidth = 80;
 const spaceshipHeight = 48;
 const spaceshipBossHeight = 154;
-const spaceshipBaseSpeed = 0.96;
+const spaceshipBaseSpeed = 2;
 const spaceshipBossHealth = 40;
 let spaceshipSpawnedThisWave = false;
 let bossSpawnCounter = 0;
@@ -191,18 +191,18 @@ let twinBosses = [];
 
 // Invader Bullets
 const invaderBullets = [];
-const invaderBulletSpeed = 1.25;
+const invaderBulletSpeed = 2.5;
 const invaderBulletWidth = 5;
 const invaderBulletHeight = 15;
-const sniperBulletSpeed = 1.75;
+const sniperBulletSpeed = 3;
 const tankBulletWidth = 10;
-const tankBulletSpeed = 1;
+const tankBulletSpeed = 1.75;
 const bossLaserWidth = 8;
 const bossLaserHeight = 30;
-const bossLaserSpeed = 2.0;
+const bossLaserSpeed = 2.5;
 const guardianBulletWidth = 15;
 const guardianBulletHeight = 20;
-const guardianBulletSpeed = .75;
+const guardianBulletSpeed = 1.5;
 let shootTimer = 0;
 let enemySpawnTimer = 0;
 
