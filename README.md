@@ -13,7 +13,7 @@ Play the games now at: https://bartonbase.github.io/Fishnu-Arcade
 
 ## Setup
 This site is hosted on GitHub Pages:
-- Repository: `https://github.com/yourusername/BBGames`
+- Repository: `https://github.com/bartonbase/fishnu-arcade`
 - Source: `main` branch, root directory (`/`)
 
 ## Credits
