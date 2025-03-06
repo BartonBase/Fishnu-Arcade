@@ -91,13 +91,13 @@ function createNebulae() {
 }
 createStars();
 
-// Player (scaled for 800x600 canvas, increased speed)
+// Player (scaled for 800x600 canvas, increased by 60% from 4 to 6.4)
 const player = {
     x: canvas.width / 2 - 20, // Center, adjusted for 40px width
     y: canvas.height - 57, // Bottom, adjusted for 27px height + 7px padding
     width: 40,
     height: 27,
-    speed: 4, // Increased from 3.5 for normal speed in 800x600
+    speed: 6.4, // Increased 60% from 4 (4 * 1.6)
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
@@ -116,11 +116,11 @@ const player = {
     currentPowerUp: null
 };
 
-// Player Bullets (with pooling, increased speed)
+// Player Bullets (with pooling, increased by 60% from 5.5 to 8.8)
 const bullets = Array(BULLET_POOL_SIZE).fill().map(() => ({
     x: 0, y: 0, width: BULLET_WIDTH, height: BULLET_HEIGHT, active: false, dx: 0, pierced: false
 }));
-const bulletSpeed = 5.5; // Increased from 3.9 for normal speed in 800x600
+const bulletSpeed = 8.8; // Increased 60% from 5.5 (5.5 * 1.6)
 function spawnBullet(x, y, dx = 0) {
     const bullet = bullets.find(b => !b.active);
     if (bullet) {
@@ -133,76 +133,76 @@ function spawnBullet(x, y, dx = 0) {
     }
 }
 
-// Invaders (increased speed)
+// Invaders (increased by 60% from 0.75 to 1.2)
 const invaders = [];
 const invaderRows = 5;
 const invaderCols = 10;
 const invaderWidth = 40;
 const invaderHeight = 15;
-const initialInvaderSpeed = 0.75; // Increased from 0.5 for normal speed in 800x600
+const initialInvaderSpeed = 1.2; // Increased 60% from 0.75 (0.75 * 1.6)
 let invaderSpeed = initialInvaderSpeed;
 let invaderDirection = 1;
 let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL;
 
-// Stealth Invaders (Level 2, increased speed)
+// Stealth Invaders (Level 2, increased by 60% from 1.2 to 1.92)
 const stealthInvaders = [];
 const stealthWidth = 30;
 const stealthHeight = 20;
-const stealthSpeed = 1.2; // Increased from 0.8 for normal speed in 800x600
+const stealthSpeed = 1.92; // Increased 60% from 1.2 (1.2 * 1.6)
 
-// Sniper Enemy (increased speed)
+// Sniper Enemy (increased by 60% from 1.0 to 1.6)
 const snipers = [];
 const sniperWidth = 80;
 const sniperHeight = 80;
-const sniperBaseSpeed = 1.0; // Increased from 0.7 for normal speed in 800x600
+const sniperBaseSpeed = 1.6; // Increased 60% from 1.0 (1.0 * 1.6)
 const sniperShootInterval = 360;
 const sniperHealth = 4;
 let snipersSpawnedThisWave = 0;
 
-// Tank Enemy (increased speed)
+// Tank Enemy (increased by 60% from 0.15 to 0.24)
 const tanks = [];
 const tankWidth = 60;
 const tankHeight = 40;
-const tankBaseSpeed = 0.15; // Increased from 0.1 for normal speed in 800x600
+const tankBaseSpeed = 0.24; // Increased 60% from 0.15 (0.15 * 1.6)
 const tankHealth = 3;
 const tankShootInterval = 180;
 let tankSpawnedThisWave = false;
 
-// Black Hole Guardian (increased speed)
+// Black Hole Guardian (increased by 60% from 0.3 to 0.48)
 const guardians = [];
 const guardianWidth = 50;
 const guardianHeight = 50;
-const guardianSpeed = 0.3; // Increased from 0.2 for normal speed in 800x600
+const guardianSpeed = 0.48; // Increased 60% from 0.3 (0.3 * 1.6)
 const guardianHealth = 5;
 const guardianShootInterval = 120;
 
-// Boss (Spaceship in Wave 3 Level 1 and Level 3 even waves, increased speed)
+// Boss (Spaceship in Wave 3 Level 1 and Level 3 even waves, increased by 60% from 1.4 to 2.24)
 let spaceship = null;
 const spaceshipWidth = 80;
 const spaceshipHeight = 48;
 const spaceshipBossHeight = 154;
-const spaceshipBaseSpeed = 1.4; // Increased from 0.96 for normal speed in 800x600
+const spaceshipBaseSpeed = 2.24; // Increased 60% from 1.4 (1.4 * 1.6)
 const spaceshipBossHealth = 40;
 let spaceshipSpawnedThisWave = false;
 let bossSpawnCounter = 0;
 
-// Twin Bosses (Level 2 Wave 3 and Level 3 even waves, increased speed)
+// Twin Bosses (Level 2 Wave 3 and Level 3 even waves, increased by 60% from 1.4 to 2.24)
 let twinBosses = [];
 
-// Invader Bullets (increased speed)
+// Invader Bullets (increased by 60% from 0.75 to 1.2)
 const invaderBullets = [];
-const invaderBulletSpeed = 0.75; // Increased from 0.5 for normal speed in 800x600
+const invaderBulletSpeed = 1.2; // Increased 60% from 0.75 (0.75 * 1.6)
 const invaderBulletWidth = 5;
 const invaderBulletHeight = 15;
-const sniperBulletSpeed = 1.5; // Increased from 1.0 for normal speed in 800x600
+const sniperBulletSpeed = 2.4; // Increased 60% from 1.5 (1.5 * 1.6)
 const tankBulletWidth = 10;
-const tankBulletSpeed = 0.4; // Increased from 0.25 for normal speed in 800x600
+const tankBulletSpeed = 0.64; // Increased 60% from 0.4 (0.4 * 1.6)
 const bossLaserWidth = 8;
 const bossLaserHeight = 30;
-const bossLaserSpeed = 3.0; // Increased from 2.0 for normal speed in 800x600
+const bossLaserSpeed = 4.8; // Increased 60% from 3.0 (3.0 * 1.6)
 const guardianBulletWidth = 15;
 const guardianBulletHeight = 20;
-const guardianBulletSpeed = 0.75; // Increased from 0.5 for normal speed in 800x600
+const guardianBulletSpeed = 1.2; // Increased 60% from 0.75 (0.75 * 1.6)
 let shootTimer = 0;
 let enemySpawnTimer = 0;
 
