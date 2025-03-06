@@ -3,8 +3,7 @@
 Welcome to **Fishnu's Arcade** - a collection of fun, browser-based games created by Barton Baste! This site is hosted on GitHub Pages and will grow with more games over time.
 
 ## Live Site
-Play the games now at: bartonbase.github.io/Fishnu-Arcade/
-## Current Games
+Play the games now at: https://bartonbase.github.io/Fishnu-Arcade
 - **Broth Invaders**: A space shooter with waves of invaders, power-ups, and epic boss battles.
 
 ## How to Play
