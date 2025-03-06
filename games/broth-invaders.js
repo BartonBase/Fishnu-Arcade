@@ -25,7 +25,7 @@ const STATES = {
 };
 let gameState = STATES.MENU;
 
-// Load images
+// Load images (external URLs for testing)
 const heroImage = new Image(); heroImage.src = 'https://i.postimg.cc/1zs46h1m/Untitled-4.png';
 const bulletImage = new Image(); bulletImage.src = 'https://i.postimg.cc/3N7LQxsM/Untitled.png';
 const invaderImageRow1 = new Image(); invaderImageRow1.src = 'https://i.postimg.cc/Y0GSktY3/Untitled-3.png';
@@ -40,7 +40,7 @@ const powerUpImage = new Image(); powerUpImage.src = 'https://i.postimg.cc/9F4X2
 const newSpaceshipImage = new Image(); newSpaceshipImage.src = 'https://i.postimg.cc/rpphwDx6/Untitled-15.png';
 const level2BossImage = new Image(); level2BossImage.src = 'https://i.postimg.cc/MGKWZm9W/Untitled-17.png';
 
-// Load audio
+// Load audio (external URLs for testing)
 const shootSound = new Audio('https://www.myinstants.com/media/sounds/shoot.wav');
 const level1Music = new Audio('https://drive.google.com/uc?export=download&id=1qSksvQfxhaQ4hBAZHyWO4bX64qGpnPZM');
 const level2Music = new Audio('https://drive.google.com/uc?export=download&id=1y7cXpVS1ffXGGS6FdwalBccO8SpvaOxA');
@@ -91,13 +91,13 @@ function createNebulae() {
 }
 createStars();
 
-// Player
+// Player (scaled for 800x600 canvas, increased speed)
 const player = {
-    x: canvas.width / 2,
-    y: canvas.height - 50 - 7,
+    x: canvas.width / 2 - 20, // Center, adjusted for 40px width
+    y: canvas.height - 57, // Bottom, adjusted for 27px height + 7px padding
     width: 40,
     height: 27,
-    speed: 6,
+    speed: 4, // Increased from 3.5 for normal speed in 800x600
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
@@ -116,11 +116,11 @@ const player = {
     currentPowerUp: null
 };
 
-// Player Bullets (with pooling)
+// Player Bullets (with pooling, increased speed)
 const bullets = Array(BULLET_POOL_SIZE).fill().map(() => ({
     x: 0, y: 0, width: BULLET_WIDTH, height: BULLET_HEIGHT, active: false, dx: 0, pierced: false
 }));
-const bulletSpeed = 7.5;
+const bulletSpeed = 5.5; // Increased from 3.9 for normal speed in 800x600
 function spawnBullet(x, y, dx = 0) {
     const bullet = bullets.find(b => !b.active);
     if (bullet) {
@@ -133,92 +133,92 @@ function spawnBullet(x, y, dx = 0) {
     }
 }
 
-// Invaders
+// Invaders (increased speed)
 const invaders = [];
 const invaderRows = 5;
 const invaderCols = 10;
 const invaderWidth = 40;
 const invaderHeight = 15;
-const initialInvaderSpeed = 1.5;
+const initialInvaderSpeed = 0.75; // Increased from 0.5 for normal speed in 800x600
 let invaderSpeed = initialInvaderSpeed;
 let invaderDirection = 1;
 let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL;
 
-// Stealth Invaders (Level 2)
+// Stealth Invaders (Level 2, increased speed)
 const stealthInvaders = [];
 const stealthWidth = 30;
 const stealthHeight = 20;
-const stealthSpeed = 1.5;
+const stealthSpeed = 1.2; // Increased from 0.8 for normal speed in 800x600
 
-// Sniper Enemy
+// Sniper Enemy (increased speed)
 const snipers = [];
 const sniperWidth = 80;
 const sniperHeight = 80;
-const sniperBaseSpeed = 1.9;
+const sniperBaseSpeed = 1.0; // Increased from 0.7 for normal speed in 800x600
 const sniperShootInterval = 360;
 const sniperHealth = 4;
 let snipersSpawnedThisWave = 0;
 
-// Tank Enemy
+// Tank Enemy (increased speed)
 const tanks = [];
 const tankWidth = 60;
 const tankHeight = 40;
-const tankBaseSpeed = 1;
+const tankBaseSpeed = 0.15; // Increased from 0.1 for normal speed in 800x600
 const tankHealth = 3;
 const tankShootInterval = 180;
 let tankSpawnedThisWave = false;
 
-// Black Hole Guardian
+// Black Hole Guardian (increased speed)
 const guardians = [];
 const guardianWidth = 50;
 const guardianHeight = 50;
-const guardianSpeed = 1;
+const guardianSpeed = 0.3; // Increased from 0.2 for normal speed in 800x600
 const guardianHealth = 5;
 const guardianShootInterval = 120;
 
-// Boss (Spaceship in Wave 3 Level 1 and Level 3 even waves)
+// Boss (Spaceship in Wave 3 Level 1 and Level 3 even waves, increased speed)
 let spaceship = null;
 const spaceshipWidth = 80;
 const spaceshipHeight = 48;
 const spaceshipBossHeight = 154;
-const spaceshipBaseSpeed = 2;
+const spaceshipBaseSpeed = 1.4; // Increased from 0.96 for normal speed in 800x600
 const spaceshipBossHealth = 40;
 let spaceshipSpawnedThisWave = false;
 let bossSpawnCounter = 0;
 
-// Twin Bosses (Level 2 Wave 3 and Level 3 even waves)
+// Twin Bosses (Level 2 Wave 3 and Level 3 even waves, increased speed)
 let twinBosses = [];
 
-// Invader Bullets
+// Invader Bullets (increased speed)
 const invaderBullets = [];
-const invaderBulletSpeed = 2.5;
+const invaderBulletSpeed = 0.75; // Increased from 0.5 for normal speed in 800x600
 const invaderBulletWidth = 5;
 const invaderBulletHeight = 15;
-const sniperBulletSpeed = 3;
+const sniperBulletSpeed = 1.5; // Increased from 1.0 for normal speed in 800x600
 const tankBulletWidth = 10;
-const tankBulletSpeed = 1.75;
+const tankBulletSpeed = 0.4; // Increased from 0.25 for normal speed in 800x600
 const bossLaserWidth = 8;
 const bossLaserHeight = 30;
-const bossLaserSpeed = 2.5;
+const bossLaserSpeed = 3.0; // Increased from 2.0 for normal speed in 800x600
 const guardianBulletWidth = 15;
 const guardianBulletHeight = 20;
-const guardianBulletSpeed = 1.5;
+const guardianBulletSpeed = 0.75; // Increased from 0.5 for normal speed in 800x600
 let shootTimer = 0;
 let enemySpawnTimer = 0;
 
-// Shields
+// Shields (positioned for 800x600)
 const shields = [];
 let shieldWidth = 90;
 const shieldHeight = 20;
 const shieldY = canvas.height - 142;
 
-// Power-Up
+// Power-Up (positioned for 800x600)
 let powerUp = null;
 const powerUpWidth = 20;
 const powerUpHeight = 20;
-const powerUpY = canvas.height - 50 - 7;
+const powerUpY = canvas.height - 57; // Adjusted for player position
 
-// Environmental Hazards (Level 2 and 3)
+// Environmental Hazards (Level 2 and 3, up to but not including meteor speeds)
 const meteors = [];
 const shieldMeteors = [];
 const blackHoles = [];
