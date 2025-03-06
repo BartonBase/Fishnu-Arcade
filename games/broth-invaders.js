@@ -102,7 +102,7 @@ const player = {
     y: canvas.height - 57, // Bottom, adjusted for 27px height + 7px padding
     width: 40,
     height: 27,
-    speed: 7.5, // Reverted to 9.6 (from 50% increase on 6.4, no further increases)
+    speed: 5.5, // Reverted to 9.6 (from 50% increase on 6.4, no further increases)
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
@@ -125,7 +125,7 @@ const player = {
 const bullets = Array(BULLET_POOL_SIZE).fill().map(() => ({
     x: 0, y: 0, width: BULLET_WIDTH, height: BULLET_HEIGHT, active: false, dx: 0, pierced: false
 }));
-const bulletSpeed = 5.5; // Reverted to 8.8 (from 60% increase on 5.5, no further increases)
+const bulletSpeed = 4.5; // Reverted to 8.8 (from 60% increase on 5.5, no further increases)
 function spawnBullet(x, y, dx = 0) {
     const bullet = bullets.find(b => !b.active);
     if (bullet) {
@@ -144,7 +144,7 @@ const invaderRows = 5;
 const invaderCols = 10;
 const invaderWidth = 40;
 const invaderHeight = 15;
-const initialInvaderSpeed = 1.0; // Reverted to 1.2 (from 60% increase on 0.75, no further increases)
+const initialInvaderSpeed = 0.75; // Reverted to 1.2 (from 60% increase on 0.75, no further increases)
 let invaderSpeed = initialInvaderSpeed;
 let invaderDirection = 1;
 let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL; // Already adjusted to 176 for 50% faster fire rate
@@ -153,7 +153,7 @@ let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL; // Already adjusted to 1
 const stealthInvaders = [];
 const stealthWidth = 30;
 const stealthHeight = 20;
-const stealthSpeed = 1.6; // Keep as is (from previous 60% increase)
+const stealthSpeed = 1.2; // Keep as is (from previous 60% increase)
 
 // Sniper Enemy (revert fire rate to 240 from 100, keep speed at 1.6)
 const snipers = [];
@@ -177,7 +177,7 @@ let tankSpawnedThisWave = false;
 const guardians = [];
 const guardianWidth = 50;
 const guardianHeight = 50;
-const guardianSpeed = 0.4; // Keep as is (from previous 60% increase)
+const guardianSpeed = 0.3; // Keep as is (from previous 60% increase)
 const guardianHealth = 5;
 const guardianShootInterval = 100; // Reverted to 80 (from 50% faster 50, then 50% faster 33)
 
@@ -186,7 +186,7 @@ let spaceship = null;
 const spaceshipWidth = 80;
 const spaceshipHeight = 40;
 const spaceshipBossHeight = 154;
-const spaceshipBaseSpeed = 1.3; // Keep as is (from previous 60% increase)
+const spaceshipBaseSpeed = 1.1; // Keep as is (from previous 60% increase)
 const spaceshipBossHealth = 40;
 let spaceshipSpawnedThisWave = false;
 let bossSpawnCounter = 0;
