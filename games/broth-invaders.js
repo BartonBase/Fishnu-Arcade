@@ -4,7 +4,7 @@ canvas.width = 800; // Fixed width for consistent logic
 canvas.height = 600; // Fixed height for consistent logic
 
 // Constants for readability
-const BASE_INVADER_SHOOT_INTERVAL = 176; // Reduced from 264 (50% faster enemy fire rate)
+const BASE_INVADER_SHOOT_INTERVAL = 110; // Reduced from 176 (60% faster enemy fire rate, 176 / 1.6)
 const ENEMY_SPAWN_DELAY = 240;
 const LEVEL_COMPLETE_DELAY = 180;
 const SHIELD_HEALTH_MAX = 1000;
@@ -91,13 +91,13 @@ function createNebulae() {
 }
 createStars();
 
-// Player (scaled for 800x600 canvas, increased by 50% from 6.4 to 9.6)
+// Player (scaled for 800x600 canvas, increased by 33% from 9.6 to 12.77)
 const player = {
     x: canvas.width / 2 - 20, // Center, adjusted for 40px width
     y: canvas.height - 57, // Bottom, adjusted for 27px height + 7px padding
     width: 40,
     height: 27,
-    speed: 9.6, // Increased 50% from 6.4 (6.4 * 1.5)
+    speed: 12.77, // Increased 33% from 9.6 (9.6 * 1.33)
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
@@ -116,11 +116,11 @@ const player = {
     currentPowerUp: null
 };
 
-// Player Bullets (with pooling, increased by 60% from 5.5 to 8.8)
+// Player Bullets (with pooling, increased by 60% from 8.8 to 14.1)
 const bullets = Array(BULLET_POOL_SIZE).fill().map(() => ({
     x: 0, y: 0, width: BULLET_WIDTH, height: BULLET_HEIGHT, active: false, dx: 0, pierced: false
 }));
-const bulletSpeed = 8.8; // Increased 60% from 5.5 (5.5 * 1.6)
+const bulletSpeed = 14.1; // Increased 60% from 8.8 (8.8 * 1.6)
 function spawnBullet(x, y, dx = 0) {
     const bullet = bullets.find(b => !b.active);
     if (bullet) {
@@ -133,55 +133,55 @@ function spawnBullet(x, y, dx = 0) {
     }
 }
 
-// Invaders (increased by 60% from 0.75 to 1.2)
+// Invaders (keep speed at 1.2 as previously increased)
 const invaders = [];
 const invaderRows = 5;
 const invaderCols = 10;
 const invaderWidth = 40;
 const invaderHeight = 15;
-const initialInvaderSpeed = 1.2; // Increased 60% from 0.75 (0.75 * 1.6)
+const initialInvaderSpeed = 1.2; // Keep as is (from previous 60% increase)
 let invaderSpeed = initialInvaderSpeed;
 let invaderDirection = 1;
-let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL; // Already adjusted to 176 for 50% faster fire rate
+let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL; // Already adjusted to 110 for 60% faster fire rate
 
-// Stealth Invaders (Level 2, increased by 60% from 1.2 to 1.92)
+// Stealth Invaders (Level 2, keep speed at 1.92 as previously increased)
 const stealthInvaders = [];
 const stealthWidth = 30;
 const stealthHeight = 20;
-const stealthSpeed = 1.92; // Increased 60% from 1.2 (1.2 * 1.6)
+const stealthSpeed = 1.92; // Keep as is (from previous 60% increase)
 
-// Sniper Enemy (adjust fire rate by 50%, keep speed at 1.6)
+// Sniper Enemy (adjust fire rate by 60%, keep speed at 1.6)
 const snipers = [];
 const sniperWidth = 80;
 const sniperHeight = 80;
-const sniperBaseSpeed = 1.6; // Increased 60% from 1.0 (1.0 * 1.6)
-const sniperShootInterval = 240; // Reduced from 360 (50% faster, 360 / 1.5)
+const sniperBaseSpeed = 1.6; // Keep as is (from previous 60% increase)
+const sniperShootInterval = 150; // Reduced from 240 (60% faster, 240 / 1.6)
 const sniperHealth = 4;
 let snipersSpawnedThisWave = 0;
 
-// Tank Enemy (adjust fire rate by 50%, keep speed at 0.24)
+// Tank Enemy (adjust fire rate by 60%, keep speed at 0.24)
 const tanks = [];
 const tankWidth = 60;
 const tankHeight = 40;
-const tankBaseSpeed = 0.24; // Increased 60% from 0.15 (0.15 * 1.6)
+const tankBaseSpeed = 0.24; // Keep as is (from previous 60% increase)
 const tankHealth = 3;
-const tankShootInterval = 120; // Reduced from 180 (50% faster, 180 / 1.5)
+const tankShootInterval = 75; // Reduced from 120 (60% faster, 120 / 1.6)
 let tankSpawnedThisWave = false;
 
-// Black Hole Guardian (adjust fire rate by 50%, keep speed at 0.48)
+// Black Hole Guardian (adjust fire rate by 60%, keep speed at 0.48)
 const guardians = [];
 const guardianWidth = 50;
 const guardianHeight = 50;
-const guardianSpeed = 0.48; // Increased 60% from 0.3 (0.3 * 1.6)
+const guardianSpeed = 0.48; // Keep as is (from previous 60% increase)
 const guardianHealth = 5;
-const guardianShootInterval = 80; // Reduced from 120 (50% faster, 120 / 1.5)
+const guardianShootInterval = 50; // Reduced from 80 (60% faster, 80 / 1.6)
 
 // Boss (Spaceship in Wave 3 Level 1 and Level 3 even waves, keep speed at 2.24)
 let spaceship = null;
 const spaceshipWidth = 80;
 const spaceshipHeight = 48;
 const spaceshipBossHeight = 154;
-const spaceshipBaseSpeed = 2.24; // Increased 60% from 1.4 (1.4 * 1.6)
+const spaceshipBaseSpeed = 2.24; // Keep as is (from previous 60% increase)
 const spaceshipBossHealth = 40;
 let spaceshipSpawnedThisWave = false;
 let bossSpawnCounter = 0;
@@ -189,20 +189,20 @@ let bossSpawnCounter = 0;
 // Twin Bosses (Level 2 Wave 3 and Level 3 even waves, keep speed at 2.24)
 let twinBosses = [];
 
-// Invader Bullets (increased by 60% from 0.75 to 1.2, etc.)
+// Invader Bullets (keep speeds as previously increased, except bulletSpeed updated)
 const invaderBullets = [];
-const invaderBulletSpeed = 1.2; // Increased 60% from 0.75 (0.75 * 1.6)
+const invaderBulletSpeed = 1.2; // Keep as is (from previous 60% increase)
 const invaderBulletWidth = 5;
 const invaderBulletHeight = 15;
-const sniperBulletSpeed = 2.4; // Increased 60% from 1.5 (1.5 * 1.6)
+const sniperBulletSpeed = 2.4; // Keep as is (from previous 60% increase)
 const tankBulletWidth = 10;
-const tankBulletSpeed = 0.64; // Increased 60% from 0.4 (0.4 * 1.6)
+const tankBulletSpeed = 0.64; // Keep as is (from previous 60% increase)
 const bossLaserWidth = 8;
 const bossLaserHeight = 30;
-const bossLaserSpeed = 4.8; // Increased 60% from 3.0 (3.0 * 1.6)
+const bossLaserSpeed = 4.8; // Keep as is (from previous 60% increase)
 const guardianBulletWidth = 15;
 const guardianBulletHeight = 20;
-const guardianBulletSpeed = 1.2; // Increased 60% from 0.75 (0.75 * 1.6)
+const guardianBulletSpeed = 1.2; // Keep as is (from previous 60% increase)
 let shootTimer = 0;
 let enemySpawnTimer = 0;
 
