@@ -4,7 +4,7 @@ canvas.width = 800; // Fixed width for consistent logic
 canvas.height = 600; // Fixed height for consistent logic
 
 // Constants for readability
-const BASE_INVADER_SHOOT_INTERVAL = 176; // Reduced from 264 (50% faster enemy fire rate)
+const BASE_INVADER_SHOOT_INTERVAL = 264; // Reduced from 264 (50% faster enemy fire rate)
 const ENEMY_SPAWN_DELAY = 240;
 const LEVEL_COMPLETE_DELAY = 180;
 const SHIELD_HEALTH_MAX = 1000;
@@ -97,7 +97,7 @@ const player = {
     y: canvas.height - 57, // Bottom, adjusted for 27px height + 7px padding
     width: 40,
     height: 27,
-    speed: 9.6, // Reverted to 9.6 (from 50% increase on 6.4, no further increases)
+    speed: 6.4, // Reverted to 9.6 (from 50% increase on 6.4, no further increases)
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
@@ -120,7 +120,7 @@ const player = {
 const bullets = Array(BULLET_POOL_SIZE).fill().map(() => ({
     x: 0, y: 0, width: BULLET_WIDTH, height: BULLET_HEIGHT, active: false, dx: 0, pierced: false
 }));
-const bulletSpeed = 8.8; // Reverted to 8.8 (from 60% increase on 5.5, no further increases)
+const bulletSpeed = 5.5; // Reverted to 8.8 (from 60% increase on 5.5, no further increases)
 function spawnBullet(x, y, dx = 0) {
     const bullet = bullets.find(b => !b.active);
     if (bullet) {
@@ -139,7 +139,7 @@ const invaderRows = 5;
 const invaderCols = 10;
 const invaderWidth = 40;
 const invaderHeight = 15;
-const initialInvaderSpeed = 1.2; // Reverted to 1.2 (from 60% increase on 0.75, no further increases)
+const initialInvaderSpeed = 0.75; // Reverted to 1.2 (from 60% increase on 0.75, no further increases)
 let invaderSpeed = initialInvaderSpeed;
 let invaderDirection = 1;
 let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL; // Already adjusted to 176 for 50% faster fire rate
@@ -148,14 +148,14 @@ let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL; // Already adjusted to 1
 const stealthInvaders = [];
 const stealthWidth = 30;
 const stealthHeight = 20;
-const stealthSpeed = 1.92; // Keep as is (from previous 60% increase)
+const stealthSpeed = 0.8; // Keep as is (from previous 60% increase)
 
 // Sniper Enemy (revert fire rate to 240 from 100, keep speed at 1.6)
 const snipers = [];
 const sniperWidth = 80;
 const sniperHeight = 80;
-const sniperBaseSpeed = 1.6; // Keep as is (from previous 60% increase)
-const sniperShootInterval = 240; // Reverted to 240 (from 50% faster 150, then 50% faster 100)
+const sniperBaseSpeed = 1.0; // Keep as is (from previous 60% increase)
+const sniperShootInterval = 100; // Reverted to 240 (from 50% faster 150, then 50% faster 100)
 const sniperHealth = 4;
 let snipersSpawnedThisWave = 0;
 
@@ -165,7 +165,7 @@ const tankWidth = 60;
 const tankHeight = 40;
 const tankBaseSpeed = 0.24; // Keep as is (from previous 60% increase)
 const tankHealth = 3;
-const tankShootInterval = 120; // Reverted to 120 (from 50% faster 75, then 50% faster 50)
+const tankShootInterval = 50; // Reverted to 120 (from 50% faster 75, then 50% faster 50)
 let tankSpawnedThisWave = false;
 
 // Black Hole Guardian (revert fire rate to 80 from 33, keep speed at 0.48)
@@ -174,14 +174,14 @@ const guardianWidth = 50;
 const guardianHeight = 50;
 const guardianSpeed = 0.48; // Keep as is (from previous 60% increase)
 const guardianHealth = 5;
-const guardianShootInterval = 80; // Reverted to 80 (from 50% faster 50, then 50% faster 33)
+const guardianShootInterval = 33; // Reverted to 80 (from 50% faster 50, then 50% faster 33)
 
 // Boss (Spaceship in Wave 3 Level 1 and Level 3 even waves, keep speed at 2.24)
 let spaceship = null;
 const spaceshipWidth = 80;
 const spaceshipHeight = 48;
 const spaceshipBossHeight = 154;
-const spaceshipBaseSpeed = 2.24; // Keep as is (from previous 60% increase)
+const spaceshipBaseSpeed = 1.65; // Keep as is (from previous 60% increase)
 const spaceshipBossHealth = 40;
 let spaceshipSpawnedThisWave = false;
 let bossSpawnCounter = 0;
@@ -191,18 +191,18 @@ let twinBosses = [];
 
 // Invader Bullets (reverted to 1.2, 2.4, 0.64, 4.8, 1.2 from 2.4, 4.8, 1.28, 9.6, 2.4)
 const invaderBullets = [];
-const invaderBulletSpeed = 1.2; // Reverted to 1.2 (from 60% increase on 0.75, then 100% to 2.4)
+const invaderBulletSpeed = 0.75; // Reverted to 1.2 (from 60% increase on 0.75, then 100% to 2.4)
 const invaderBulletWidth = 5;
 const invaderBulletHeight = 15;
-const sniperBulletSpeed = 2.4; // Reverted to 2.4 (from 60% increase on 1.5, then 100% to 4.8)
+const sniperBulletSpeed = 1.5; // Reverted to 2.4 (from 60% increase on 1.5, then 100% to 4.8)
 const tankBulletWidth = 10;
-const tankBulletSpeed = 0.64; // Reverted to 0.64 (from 60% increase on 0.4, then 100% to 1.28)
+const tankBulletSpeed = 0.4; // Reverted to 0.64 (from 60% increase on 0.4, then 100% to 1.28)
 const bossLaserWidth = 8;
 const bossLaserHeight = 30;
-const bossLaserSpeed = 4.8; // Reverted to 4.8 (from 60% increase on 3.0, then 100% to 9.6)
+const bossLaserSpeed = 3.0; // Reverted to 4.8 (from 60% increase on 3.0, then 100% to 9.6)
 const guardianBulletWidth = 15;
 const guardianBulletHeight = 20;
-const guardianBulletSpeed = 1.2; // Reverted to 1.2 (from 60% increase on 0.75, then 100% to 2.4)
+const guardianBulletSpeed = 0.75; // Reverted to 1.2 (from 60% increase on 0.75, then 100% to 2.4)
 let shootTimer = 0;
 let enemySpawnTimer = 0;
 
