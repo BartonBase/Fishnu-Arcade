@@ -4,7 +4,7 @@ canvas.width = 800; // Fixed width for consistent logic
 canvas.height = 600; // Fixed height for consistent logic
 
 // Constants for readability
-const BASE_INVADER_SHOOT_INTERVAL = 176; // Reduced from 264 (50% faster enemy fire rate)
+const BASE_INVADER_SHOOT_INTERVAL = 264;
 const ENEMY_SPAWN_DELAY = 240;
 const LEVEL_COMPLETE_DELAY = 180;
 const SHIELD_HEALTH_MAX = 1000;
@@ -24,10 +24,8 @@ const STATES = {
     LEVEL_COMPLETE: 'level_complete'
 };
 let gameState = STATES.MENU;
-let level = 1; // Default level for testing audio
-let wave = 1; // Default wave for testing audio
 
-// Load images (external URLs for testing)
+// Load images
 const heroImage = new Image(); heroImage.src = 'https://i.postimg.cc/1zs46h1m/Untitled-4.png';
 const bulletImage = new Image(); bulletImage.src = 'https://i.postimg.cc/3N7LQxsM/Untitled.png';
 const invaderImageRow1 = new Image(); invaderImageRow1.src = 'https://i.postimg.cc/Y0GSktY3/Untitled-3.png';
@@ -42,57 +40,33 @@ const powerUpImage = new Image(); powerUpImage.src = 'https://i.postimg.cc/9F4X2
 const newSpaceshipImage = new Image(); newSpaceshipImage.src = 'https://i.postimg.cc/rpphwDx6/Untitled-15.png';
 const level2BossImage = new Image(); level2BossImage.src = 'https://i.postimg.cc/MGKWZm9W/Untitled-17.png';
 
-// Load audio (internal assets in assets/music/)
-const shootSound = new Audio('https://www.myinstants.com/media/sounds/shoot.wav'); // Keep external for now
-const level1Music = new Audio('../assets/music/level1.wav');
-const level2Music = new Audio('../assets/music/level2.wav');
-const level3Music = new Audio('../assets/music/level3.mp3');
-const musics = [level1Music, level2Music, level3Music];
+// Load audio
+const shootSound = new Audio('https://www.myinstants.com/media/sounds/shoot.wav');
+const level1Music = new Audio('https://drive.google.com/uc?export=download&id=1qSksvQfxhaQ4hBAZHyWO4bX64qGpnPZM');
+const level2Music = new Audio('https://drive.google.com/uc?export=download&id=1y7cXpVS1ffXGGS6FdwalBccO8SpvaOxA');
+const level3Music1 = new Audio('https://drive.google.com/uc?export=download&id=1U3_Eso5OYwVq7PsX4kfEyqSIXzXcPwyD');
+const level3Music2 = new Audio('https://drive.google.com/uc?export=download&id=10m19QiwEAcpxfSwqDrfIMiKymaztFksg');
+const musics = [level1Music, level2Music, [level3Music1, level3Music2]];
 musics.forEach(m => {
-    m.loop = true;
-    m.volume = 0.5;
+    if (Array.isArray(m)) m.forEach(track => { track.loop = true; track.volume = 0.5; });
+    else { m.loop = true; m.volume = 0.5; }
 });
 
-// Ensure audio plays with existing start mechanism
-let audioInitialized = false;
-function initializeAudio() {
-    if (!audioInitialized && gameState === STATES.PLAYING) {
-        playLevelMusic();
-        audioInitialized = true;
-        console.log('Audio initialized with game start');
-    }
-}
-
-// Call initializeAudio() where your start button or action is triggered
-// Example: If you have a startGame() function, add initializeAudio() inside it:
-// function startGame() {
-//     gameState = STATES.PLAYING;
-//     initializeAudio();
-//     // ... rest of start logic
-// }
-// Or if triggered by a key press or click, add it there
-
 function playLevelMusic() {
-    // Pause all tracks and reset their time
-    musics.forEach(m => {
-        m.pause();
-        m.currentTime = 0;
-    });
-
-    // Play the track corresponding to the current level
+    musics.forEach(m => Array.isArray(m) ? m.forEach(track => { track.pause(); track.currentTime = 0; }) : (m.pause(), m.currentTime = 0));
     let currentMusic;
-    if (level >= 1 && level <= 3) {
-        currentMusic = musics[level - 1]; // level 1 -> index 0, level 2 -> index 1, level 3 -> index 2
+    if (level === 3) {
+        const trackIndex = Math.floor((wave - 1) / 5) % 2;
+        currentMusic = musics[2][trackIndex];
     } else {
-        currentMusic = musics[0]; // Default to level 1 music if level is out of range
+        currentMusic = musics[level - 1];
     }
-
     currentMusic.play()
         .then(() => console.log(`Audio started: Level ${level}, Wave ${wave}`))
         .catch(error => console.error(`Audio error: ${error}`));
 }
 
-// Starfield and Nebula setup (unchanged from here onward)
+// Starfield and Nebula setup
 const stars = [];
 const nebulae = [];
 const NUM_STARS = 100;
@@ -117,13 +91,13 @@ function createNebulae() {
 }
 createStars();
 
-// Player (scaled for 800x600 canvas, reverted to 9.6 from 19.16)
+// Player
 const player = {
-    x: canvas.width / 2 - 20,
-    y: canvas.height - 57,
+    x: canvas.width / 2,
+    y: canvas.height - 50 - 7,
     width: 40,
     height: 27,
-    speed: 5,
+    speed: 3.5,
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
