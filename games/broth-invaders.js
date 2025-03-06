@@ -4,7 +4,7 @@ canvas.width = 800; // Fixed width for consistent logic
 canvas.height = 600; // Fixed height for consistent logic
 
 // Constants for readability
-const BASE_INVADER_SHOOT_INTERVAL = 264; // Reduced from 264 (50% faster enemy fire rate)
+const BASE_INVADER_SHOOT_INTERVAL = 176; // Reduced from 264 (50% faster enemy fire rate)
 const ENEMY_SPAWN_DELAY = 240;
 const LEVEL_COMPLETE_DELAY = 180;
 const SHIELD_HEALTH_MAX = 1000;
@@ -40,33 +40,38 @@ const powerUpImage = new Image(); powerUpImage.src = 'https://i.postimg.cc/9F4X2
 const newSpaceshipImage = new Image(); newSpaceshipImage.src = 'https://i.postimg.cc/rpphwDx6/Untitled-15.png';
 const level2BossImage = new Image(); level2BossImage.src = 'https://i.postimg.cc/MGKWZm9W/Untitled-17.png';
 
-// Load audio (external URLs for testing)
-const shootSound = new Audio('https://www.myinstants.com/media/sounds/shoot.wav');
-const level1Music = new Audio('https://drive.google.com/uc?export=download&id=1qSksvQfxhaQ4hBAZHyWO4bX64qGpnPZM');
-const level2Music = new Audio('https://drive.google.com/uc?export=download&id=1y7cXpVS1ffXGGS6FdwalBccO8SpvaOxA');
-const level3Music1 = new Audio('https://drive.google.com/uc?export=download&id=1U3_Eso5OYwVq7PsX4kfEyqSIXzXcPwyD');
-const level3Music2 = new Audio('https://drive.google.com/uc?export=download&id=10m19QiwEAcpxfSwqDrfIMiKymaztFksg');
-const musics = [level1Music, level2Music, [level3Music1, level3Music2]];
+// Load audio (internal assets in assets/music/)
+const shootSound = new Audio('https://www.myinstants.com/media/sounds/shoot.wav'); // Keep external for simplicity, replace if needed
+const level1Music = new Audio('../assets/music/level1.wav');
+const level2Music = new Audio('../assets/music/level2.wav');
+const level3Music = new Audio('../assets/music/level3.mp3');
+const musics = [level1Music, level2Music, level3Music];
 musics.forEach(m => {
-    if (Array.isArray(m)) m.forEach(track => { track.loop = true; track.volume = 0.5; });
-    else { m.loop = true; m.volume = 0.5; }
+    m.loop = true;
+    m.volume = 0.5;
 });
 
 function playLevelMusic() {
-    musics.forEach(m => Array.isArray(m) ? m.forEach(track => { track.pause(); track.currentTime = 0; }) : (m.pause(), m.currentTime = 0));
+    // Pause all tracks and reset their time
+    musics.forEach(m => {
+        m.pause();
+        m.currentTime = 0;
+    });
+
+    // Play the track corresponding to the current level
     let currentMusic;
-    if (level === 3) {
-        const trackIndex = Math.floor((wave - 1) / 5) % 2;
-        currentMusic = musics[2][trackIndex];
+    if (level >= 1 && level <= 3) {
+        currentMusic = musics[level - 1]; // level 1 -> index 0, level 2 -> index 1, level 3 -> index 2
     } else {
-        currentMusic = musics[level - 1];
+        currentMusic = musics[0]; // Default to level 1 music if level is out of range
     }
+
     currentMusic.play()
         .then(() => console.log(`Audio started: Level ${level}, Wave ${wave}`))
         .catch(error => console.error(`Audio error: ${error}`));
 }
 
-// Starfield and Nebula setup
+// Starfield and Nebula setup (unchanged from here onward)
 const stars = [];
 const nebulae = [];
 const NUM_STARS = 100;
@@ -90,8 +95,8 @@ function createNebulae() {
     }
 }
 createStars();
-
 // Player (scaled for 800x600 canvas, reverted to 9.6 from 19.16)
+// ... (rest of the code remains unchanged)
 const player = {
     x: canvas.width / 2 - 20, // Center, adjusted for 40px width
     y: canvas.height - 57, // Bottom, adjusted for 27px height + 7px padding
