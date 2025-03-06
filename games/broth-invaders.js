@@ -97,7 +97,7 @@ const player = {
     y: canvas.height - 57, // Bottom, adjusted for 27px height + 7px padding
     width: 40,
     height: 27,
-    speed: 5, // Increased from 3.5 to match 800x600 for normal speed
+    speed: 3.5, // Revert to original speed
     dx: 0,
     health: PLAYER_HEALTH_MAX,
     shield: 0,
@@ -139,7 +139,7 @@ const invaderRows = 5;
 const invaderCols = 10;
 const invaderWidth = 40;
 const invaderHeight = 15;
-const initialInvaderSpeed = 2; // Increased from 0.5 to match 800x600 for normal speed
+const initialInvaderSpeed = 0.5; // Increased from 0.5 to match 800x600 for normal speed
 let invaderSpeed = initialInvaderSpeed;
 let invaderDirection = 1;
 let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL;
@@ -148,13 +148,13 @@ let invaderShootInterval = BASE_INVADER_SHOOT_INTERVAL;
 const stealthInvaders = [];
 const stealthWidth = 30;
 const stealthHeight = 20;
-const stealthSpeed = 2; // Increased from 0.8 to match 800x600 for normal speed
+const stealthSpeed = 0.5; // Increased from 0.8 to match 800x600 for normal speed
 
 // Sniper Enemy (scaled for speed)
 const snipers = [];
 const sniperWidth = 80;
 const sniperHeight = 80;
-const sniperBaseSpeed = 2; // Increased from 0.7 to match 800x600 for normal speed
+const sniperBaseSpeed = 0.5; // Increased from 0.7 to match 800x600 for normal speed
 const sniperShootInterval = 360;
 const sniperHealth = 4;
 let snipersSpawnedThisWave = 0;
@@ -172,7 +172,7 @@ let tankSpawnedThisWave = false;
 const guardians = [];
 const guardianWidth = 50;
 const guardianHeight = 50;
-const guardianSpeed = 1; // Increased from 0.2 to match 800x600 for normal speed
+const guardianSpeed = 0.2; // Increased from 0.2 to match 800x600 for normal speed
 const guardianHealth = 5;
 const guardianShootInterval = 120;
 
@@ -181,7 +181,7 @@ let spaceship = null;
 const spaceshipWidth = 80;
 const spaceshipHeight = 48;
 const spaceshipBossHeight = 154;
-const spaceshipBaseSpeed = 3; // Increased from 0.96 to match 800x600 for normal speed
+const spaceshipBaseSpeed = 0.96; // Increased from 0.96 to match 800x600 for normal speed
 const spaceshipBossHealth = 40;
 let spaceshipSpawnedThisWave = false;
 let bossSpawnCounter = 0;
@@ -191,18 +191,18 @@ let twinBosses = [];
 
 // Invader Bullets (scaled for speed)
 const invaderBullets = [];
-const invaderBulletSpeed = 2; // Increased from 0.5 to match 800x600 for normal speed
+const invaderBulletSpeed = 0.5; // Increased from 0.5 to match 800x600 for normal speed
 const invaderBulletWidth = 5;
 const invaderBulletHeight = 15;
-const sniperBulletSpeed = 3; // Increased from 1.0 to match 800x600 for normal speed
+const sniperBulletSpeed = 1; // Increased from 1.0 to match 800x600 for normal speed
 const tankBulletWidth = 10;
-const tankBulletSpeed = 1; // Increased from 0.25 to match 800x600 for normal speed
+const tankBulletSpeed = 0.25; // Increased from 0.25 to match 800x600 for normal speed
 const bossLaserWidth = 8;
 const bossLaserHeight = 30;
-const bossLaserSpeed = 5; // Increased from 2.0 to match 800x600 for normal speed
+const bossLaserSpeed = 2.0; // Increased from 2.0 to match 800x600 for normal speed
 const guardianBulletWidth = 15;
 const guardianBulletHeight = 20;
-const guardianBulletSpeed = 2; // Increased from 0.5 to match 800x600 for normal speed
+const guardianBulletSpeed = 0.5; // Increased from 0.5 to match 800x600 for normal speed
 let shootTimer = 0;
 let enemySpawnTimer = 0;
 
@@ -224,8 +224,8 @@ const shieldMeteors = [];
 const blackHoles = [];
 const meteorWidth = 20;
 const meteorHeight = 20;
-const meteorSpeed = 3; // Increased from 1.2 to match 800x600 for normal speed
-const shieldMeteorSpeed = 5; // Increased from 2.0 to match 800x600 for normal speed
+const meteorSpeed = 1.2; // Increased from 1.2 to match 800x600 for normal speed
+const shieldMeteorSpeed = 2.0; // Increased from 2.0 to match 800x600 for normal speed
 const blackHoleRadius = 40;
 
 // Explosion Particles
