@@ -76,7 +76,8 @@
       <!-- Games Section -->
 <section id="games" class="portfolio-area">
     <div class="container">
-        <h2 class="block_title">Games</h2>
+        <h2 class="block_title">Games & Music</h2>
+        <audio id="musicPlayer" controls></audio>
         <div class="row port cs-style-3">
             <div class="col-md-4 col-sm-6 col-xs-12 item-space">
                 <figure>
@@ -108,36 +109,36 @@
                     </figcaption>
                 </figure>
             </div>
+           <div class="col-md-4 col-sm-6 col-xs-12 item-space">
+    <figure>
+        <img src="assets/images/music-1.jpg" alt="Music 1">
+        <figcaption>
+            <h3>Song Title 1</h3>
+            <span>Artist 1</span>
+            <a href="#" class="button music-button" onclick="playMusic('assets/audio/song-1.mp3', this)">Play Music</a>
+        </figcaption>
+    </figure>
+</div>
             <div class="col-md-4 col-sm-6 col-xs-12 item-space">
-                <figure>
-                    <img src="assets/images/coming-soon.jpg" alt="Retro Racer Preview">
-                    <figcaption>
-                        <h3>Retro Racer</h3>
-                        <span>Coming Soon</span>
-                        <button class="button play-music-btn" data-audio="music3">Play Theme</button>
-                    </figcaption>
-                </figure>
-            </div>
+    <figure>
+        <img src="assets/images/music-2.jpg" alt="Music 2">
+        <figcaption>
+            <h3>Song Title 2</h3>
+            <span>Artist 2</span>
+            <a href="#" class="button music-button" onclick="playMusic('assets/audio/song-2.mp3', this)">Play Music</a>
+        </figcaption>
+    </figure>
+</div>
             <div class="col-md-4 col-sm-6 col-xs-12 item-space">
-                <figure>
-                    <img src="assets/images/coming-soon.jpg" alt="Coming Soon">
-                    <figcaption>
-                        <h3>Coming Soon</h3>
-                        <span>More games are on the way!</span>
-                        <a href="#" class="button" disabled>Coming Soon</a>
-                    </figcaption>
-                </figure>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12 item-space">
-                <figure>
-                    <img src="assets/images/coming-soon.jpg" alt="Coming Soon">
-                    <figcaption>
-                        <h3>Coming Soon</h3>
-                        <span>More games are on the way!</span>
-                        <a href="#" class="button" disabled>Coming Soon</a>
-                    </figcaption>
-                </figure>
-            </div>
+    <figure>
+        <img src="assets/images/music-3.jpg" alt="Music 3">
+        <figcaption>
+            <h3>Song Title 3</h3>
+            <span>Artist 3</span>
+            <a href="#" class="button music-button" onclick="playMusic('assets/audio/song-3.mp3', this)">Play Music</a>
+        </figcaption>
+    </figure>
+</div>
             <div class="col-xs-12">
                 <div class="btn-center"><a href="#" class="big button">View All</a></div>
             </div>
@@ -213,5 +214,41 @@
         <script src="assets/js/owl.carousel.js"></script>
         <script src="assets/js/script.js"></script>
 
+<script>
+var currentSong = null;
+var musicPlayer = document.getElementById('musicPlayer');
+
+function playMusic(src, button) {
+    if (currentSong === src) {
+        if (musicPlayer.paused) {
+            musicPlayer.play();
+            button.textContent = 'Pause';
+        } else {
+            musicPlayer.pause();
+            button.textContent = 'Play Music';
+        }
+    } else {
+        musicPlayer.src = src;
+        musicPlayer.play();
+        // Reset all buttons to 'Play Music'
+        var buttons = document.querySelectorAll('.music-button');
+        buttons.forEach(function(btn) {
+            btn.textContent = 'Play Music';
+        });
+        // Set current button to 'Pause'
+        button.textContent = 'Pause';
+        currentSong = src;
+    }
+}
+
+// Reset buttons when the song ends
+musicPlayer.addEventListener('ended', function() {
+    var buttons = document.querySelectorAll('.music-button');
+    buttons.forEach(function(btn) {
+        btn.textContent = 'Play Music';
+    });
+    currentSong = null;
+});
+</script>
     </body>
 </html>
